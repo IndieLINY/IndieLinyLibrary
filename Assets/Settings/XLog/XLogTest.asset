@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: XLogTest
   m_EditorClassIdentifier: 
   filter: -1
-  _signature: default
+  _signature: XLogTest
   _loggingDate: 0
