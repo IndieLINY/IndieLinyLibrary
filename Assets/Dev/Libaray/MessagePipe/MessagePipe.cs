@@ -28,7 +28,7 @@ namespace IndieLINY.MessagePipe
     }
 
     
-    [Singleton]
+    [Singleton(ESingletonType.Global)]
     public class MessagePipe : MonoBehaviourSingleton
     {
         private Dictionary<string, IMessagePipeChannel> _channels;

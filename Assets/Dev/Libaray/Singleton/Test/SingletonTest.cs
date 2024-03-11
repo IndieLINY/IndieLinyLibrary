@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using IndieLINY.Singleton;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-[Singleton]
+[Singleton(ESingletonType.Global)]
 public class TestMonoSingleton : MonoBehaviourSingleton
 {
     private List<int> _list;
@@ -34,7 +35,7 @@ public class TestMonoSingleton : MonoBehaviourSingleton
     }
 }
 
-[Singleton]
+[Singleton(ESingletonType.Global)]
 public class TestGeneralSingleton : IGeneralSingleton
 {
     private List<int> _list;
@@ -95,11 +96,11 @@ public class SingletonTest
         Singleton.GetSingleton<TestGeneralSingleton>().SetNumber(2);
 
         var mgr = Singleton.GetSingleton<TestGeneralSingleton>();
-        
+
         Debug.Log(mgr.HasNumber(1) == true);
         Debug.Log(mgr.HasNumber(3) == false);
     }
-    
+
     [Test]
     public void TestFail()
     {
@@ -111,7 +112,55 @@ public class SingletonTest
         {
             return;
         }
-        
+
         Debug.Assert(false);
+    }
+
+    [UnityTest]
+    public IEnumerator TestToLoadSceneScopeSingleton()
+    {
+        SceneManager.LoadScene("ScopeTest");
+        yield return null;
+
+        var singleton = Singleton.GetSingleton<ScopeSingleton>();
+        
+        var scopedSingleton = singleton.GetScopeSingleton<TestScopeSingleton>();
+        Debug.Assert(scopedSingleton.number == 1, scopedSingleton.number);
+
+
+        SceneManager.LoadScene("ScopeTest_Sub1");
+        yield return null;
+        scopedSingleton = singleton.GetScopeSingleton<TestScopeSingleton>();
+        Debug.Assert(scopedSingleton.number == 2, scopedSingleton.number);
+
+        SceneManager.LoadScene("ScopeTest_Sub2", LoadSceneMode.Additive);
+        yield return null;
+        scopedSingleton = singleton.GetScopeSingleton<TestScopeSingleton>();
+        Debug.Assert(scopedSingleton.number == 2, scopedSingleton.number);
+    }
+
+    [UnityTest]
+    public IEnumerator TestToLoadSceneScopeSingletonCallback()
+    {
+        int count = 0;
+        void Run(ISingleton s)
+        {
+            Debug.Log(s);
+            count++;
+        }
+        
+        SceneManager.LoadScene("ScopeTest");
+        yield return null;
+
+        var singleton = Singleton.GetSingleton<ScopeSingleton>();
+        singleton.RegisterScopeSingletonChanged<TestScopeSingleton>(Run);
+
+        SceneManager.LoadScene("ScopeTest_Sub1");
+        yield return null;
+        
+        singleton.UnRegisterScopeSingletonChanged<TestScopeSingleton>(Run);
+        SceneManager.LoadScene("ScopeTest_Sub2");
+        yield return null;
+        Debug.Assert(count == 1);
     }
 }

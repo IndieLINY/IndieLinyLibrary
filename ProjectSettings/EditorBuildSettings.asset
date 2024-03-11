@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Dev/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Dev/Libaray/Singleton/Test/ScopeTest_Sub1.unity
+    guid: b546b249610173546b111693fff4a451
+  - enabled: 1
+    path: Assets/Dev/Libaray/Singleton/Test/ScopeTest_Sub2.unity
+    guid: bb435189f5e835e479d3b01a161b08f1
+  - enabled: 1
+    path: Assets/Dev/Libaray/Singleton/Test/ScopeTest.unity
+    guid: c9ec2b3158b51924398577ac25d4131f
   m_configObjects: {}
