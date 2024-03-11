@@ -4,14 +4,16 @@ using IndieLINY.Singleton;
 using UnityEngine;
 
 [Singleton(ESingletonType.Scope)]
-public class TestScopeSingleton : MonoBehaviourSingleton
+public class TestScopeSingleton : MonoBehaviourSingleton<TestScopeSingleton>
 {
     public int number;
-    public override void Initialize()
-    {
-    }
 
     public override void Release()
     {
+    }
+
+    public override void PostInitialize()
+    {
+        
     }
 }

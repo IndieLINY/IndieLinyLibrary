@@ -11,11 +11,11 @@ namespace IndieLINY.Singleton
 {
     public static class SingletonFactory
     {
-        private static MonoBehaviourSingleton CreateMonoBehaviour(Type type)
+        private static IMonoBehaviourSingleton CreateMonoBehaviour(Type type)
         {
             var gameObject = new GameObject(type.Name);
             Object.DontDestroyOnLoad(gameObject);
-            MonoBehaviourSingleton singleton = gameObject.AddComponent(type) as MonoBehaviourSingleton;
+            IMonoBehaviourSingleton singleton = gameObject.AddComponent(type) as IMonoBehaviourSingleton;
             
             Debug.Assert(singleton != null, "failed to create MonoBehaviour singleton");
             return singleton;
@@ -33,7 +33,7 @@ namespace IndieLINY.Singleton
         {
             ISingleton singleton = null;
             
-            if (typeof(MonoBehaviourSingleton).IsAssignableFrom(type))
+            if (typeof(IMonoBehaviourSingleton).IsAssignableFrom(type))
             {
                 singleton = CreateMonoBehaviour(type);
             }

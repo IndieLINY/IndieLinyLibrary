@@ -8,14 +8,14 @@ namespace IndieLINY.Singleton
 {
     public class ScopeSingletonInitializer : MonoBehaviour
     {
-        [SerializeField] internal List<MonoBehaviourSingleton> _singletons;
+        [SerializeField] internal List<BaseMonoBehaviourSingleton> _singletons;
 
         internal bool CheckValid()
         {
             #if UNITY_EDITOR
             for (int i = 0; i < _singletons.Count; i++)
             {
-                if(_singletons[i] == false)continue;
+                if(_singletons[i] == null)continue;
 
                 var att = _singletons[i].GetType().GetCustomAttributes<SingletonAttribute>();
                 if (att is SingletonAttribute sAtt && sAtt.Type != ESingletonType.Scope)
@@ -26,7 +26,7 @@ namespace IndieLINY.Singleton
                 
                 for (int j = i + 1; j < _singletons.Count; j++)
                 {
-                    if(_singletons[j] == false)continue;
+                    if(_singletons[j] == null)continue;
                     
                     if (_singletons[i].GetType() == _singletons[j].GetType())
                     {

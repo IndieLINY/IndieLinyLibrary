@@ -12,7 +12,7 @@ namespace IndieLINY.Singleton
     {
         public delegate void ScopeChangedCallback(ISingleton singleton);
         
-        private List<MonoBehaviourSingleton> _singletons;
+        private List<IMonoBehaviourSingleton> _singletons;
 
         private Dictionary<System.Type, List<ScopeChangedCallback>> _callbackTable;
         public void Initialize()
@@ -84,7 +84,7 @@ namespace IndieLINY.Singleton
             }
         }
 
-        public T GetScopeSingleton<T>() where T : MonoBehaviourSingleton
+        public T GetScopeSingleton<T>() where T : class, IMonoBehaviourSingleton
         {
             return _singletons.Find(x => x is T) as T;
         }

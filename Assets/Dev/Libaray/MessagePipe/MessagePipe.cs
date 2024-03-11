@@ -29,11 +29,11 @@ namespace IndieLINY.MessagePipe
 
     
     [Singleton(ESingletonType.Global)]
-    public class MessagePipe : MonoBehaviourSingleton
+    public class MessagePipe : MonoBehaviourSingleton<MessagePipe>
     {
         private Dictionary<string, IMessagePipeChannel> _channels;
-        
-        public override void Initialize()
+
+        public override void PostInitialize()
         {
             _channels = new();
         }

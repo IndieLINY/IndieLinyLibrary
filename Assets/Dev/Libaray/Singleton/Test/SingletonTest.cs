@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 [Singleton(ESingletonType.Global)]
-public class TestMonoSingleton : MonoBehaviourSingleton
+public class TestMonoSingleton : MonoBehaviourSingleton<TestMonoSingleton>
 {
     private List<int> _list;
 
@@ -23,8 +23,7 @@ public class TestMonoSingleton : MonoBehaviourSingleton
             _list.Add(value);
         }
     }
-
-    public override void Initialize()
+    public override void PostInitialize()
     {
         _list = new List<int>();
     }

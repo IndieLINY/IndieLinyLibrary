@@ -135,7 +135,8 @@ namespace XRProject.Utils.Log
                     Debug.LogError(_strBuilder.ToString());
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(filter), filter, null);
+                    Debug.Assert(false, nameof(filter));
+                    break;
             }
         }
         #endregion

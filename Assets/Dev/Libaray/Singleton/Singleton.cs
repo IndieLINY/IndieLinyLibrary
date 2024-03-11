@@ -102,7 +102,12 @@ namespace IndieLINY.Singleton
                 }
             }
 
-            throw new NullReferenceException($"failed to get ({typeof(T).Name}) singleton");
+#if UNITY_INCLUDE_TESTS
+            throw new Exception($"failed to get ({typeof(T).Name}) singleton");
+#else
+            Debug.Assert(false, $"failed to get ({typeof(T).Name}) singleton");
+#endif
+            return null;
         }
     }
 }

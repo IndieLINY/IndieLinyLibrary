@@ -18,14 +18,14 @@ namespace IndieLINY.Event
     }
 
     [Singleton(ESingletonType.Global)]
-    public class EventController : MonoBehaviourSingleton
+    public class EventController : MonoBehaviourSingleton<EventController>
     {
         private delegate void EventHandler(IEventCommand command);
 
         private Dictionary<Type, List<EventHandler>> _eventPageTable;
         private Dictionary<Type, EventBridge> _bridgeTable;
 
-        public override void Initialize()
+        public override void PostInitialize()
         {
             _eventPageTable = new();
             _bridgeTable = new();

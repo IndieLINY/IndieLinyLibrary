@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XRProject.Utils.Log;
 
 namespace IndieLINY.Event
 {
@@ -14,7 +15,7 @@ namespace IndieLINY.Event
             cmd.groups.ForEach(x =>
             {
                 x.ForEach(y => Debug.Log(y));
-                Debug.Log("--");
+                XLog.LogDebug("--", "default");
             });
         }
     } 
