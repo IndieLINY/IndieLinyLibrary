@@ -38,7 +38,7 @@ namespace IndieLINY.MessagePipe
             _channels = new();
         }
 
-        public override void Release()
+        public override void PostRelease()
         {
             _channels.Clear();
             _channels = null;

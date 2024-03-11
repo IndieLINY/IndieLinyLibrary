@@ -56,7 +56,7 @@ namespace IndieLINY.Event
             }
         }
 
-        public override void Release()
+        public override void PostRelease()
         {
             _eventPageTable.Clear();
             _eventPageTable = null;

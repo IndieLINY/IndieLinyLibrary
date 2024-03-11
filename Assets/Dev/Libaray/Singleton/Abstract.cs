@@ -25,10 +25,21 @@ namespace IndieLINY.Singleton
         {
             Instance = this as T;
             
+            Debug.Assert(Instance != null, "Instance can't be null");
+            
             PostInitialize();
         }
 
         public abstract void PostInitialize();
+
+        public sealed override void Release()
+        {
+            Instance = null;
+            
+            PostRelease();;
+        }
+
+        public abstract void PostRelease();
     }
 
     public interface IMonoBehaviourSingleton : ISingleton

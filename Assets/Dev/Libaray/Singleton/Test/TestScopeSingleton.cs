@@ -8,7 +8,7 @@ public class TestScopeSingleton : MonoBehaviourSingleton<TestScopeSingleton>
 {
     public int number;
 
-    public override void Release()
+    public override void PostRelease()
     {
     }
 

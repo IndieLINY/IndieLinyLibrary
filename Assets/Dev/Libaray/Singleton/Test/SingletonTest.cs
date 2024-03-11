@@ -28,7 +28,7 @@ public class TestMonoSingleton : MonoBehaviourSingleton<TestMonoSingleton>
         _list = new List<int>();
     }
 
-    public override void Release()
+    public override void PostRelease()
     {
         _list.Clear();
     }
@@ -122,7 +122,7 @@ public class SingletonTest
         yield return null;
 
         var singleton = Singleton.GetSingleton<ScopeSingleton>();
-        
+
         var scopedSingleton = singleton.GetScopeSingleton<TestScopeSingleton>();
         Debug.Assert(scopedSingleton.number == 1, scopedSingleton.number);
 
