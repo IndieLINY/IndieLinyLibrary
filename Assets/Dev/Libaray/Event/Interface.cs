@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using IndieLINY.Event;
 using UnityEngine;
 
 /*
@@ -8,7 +9,7 @@ using UnityEngine;
  */
 public interface IBaseBehaviour
 {
-    public InteractionController Interaction { get; }
+    public CollisionInteraction Interaction { get; }
 }
 public interface IObjectBehaviour : IBaseBehaviour
 {

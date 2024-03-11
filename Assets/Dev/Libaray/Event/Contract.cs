@@ -31,7 +31,7 @@ public enum EClickContractType
 
 public abstract class BaseContractInfo
 {
-    public bool IsAlive => Check();
+    public bool IsDestroyed => Check();
     
     protected Func<bool> _destroyChecker;
     private bool Check()
